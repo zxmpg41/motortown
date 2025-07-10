@@ -19,14 +19,14 @@ $ docker run -d --name=motortown -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7
 
 Running using Docker with web api:
 ```console
-$ docker run -d --name=motortown -e ENABLE_WEB_API=true -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp -p 8080:8080/tcp dominicrico/motortown
+$ docker run -d --name=motortown -e ENABLE_WEB_API=true -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp -p 8080:8080/tcp coderocket/motortown
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/motortown-data
 $ chown 1000:1000 $(pwd)/motortown-data # Makes sure the directory is writeable by the unprivileged container user with uid 1000, known as steam
-$ docker run -d --name=motortown -v $(pwd)/motortown-data:/home/steam/motortown-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp dominicrico/motortown
+$ docker run -d --name=motortown -v $(pwd)/motortown-data:/home/steam/motortown-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp coderocket/motortown
 ```
 
 or using docker-compose, see [examples](https://github.com/dominicrico/motortown/blob/main/examples/docker-compose.yml):

@@ -9,6 +9,9 @@ FROM cm2network/steamcmd:root-bookworm AS build_stage
 LABEL maintainer="joedwards32@gmail.com"
 LABEL maintainer="mmenistr@gmail.com"
 
+ENV STEAM_USER
+ENV STEAM_PASSWORD
+ENV GUARD_CODE
 ENV STEAMAPPID=2223650
 ENV STEAMAPP="motortown"
 ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"

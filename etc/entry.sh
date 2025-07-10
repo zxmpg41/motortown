@@ -33,8 +33,8 @@ while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
     eval bash "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMD_SPEW}"\
                                 +force_install_dir "${STEAMAPPDIR}" \
                                 +@bClientTryRequestManifestWithoutCode 1 \
-				+login anonymous \
-				+app_update "${STEAMAPPID}" -beta "test2" -betapassword "motortowndedi" "${VALIDATE}"\
+				+login ${STEAM_USER} ${STEAM_PASSWORD} ${GUARD_CODE}\
+				+app_update ${STEAMAPPID} -beta test2 -betapassword motortowndedi ${VALIDATE}\
 				+quit 
     steamcmd_rc=$?
 done
