@@ -9,10 +9,10 @@ FROM cm2network/steamcmd:root-bookworm AS build_stage
 LABEL maintainer="joedwards32@gmail.com"
 LABEL maintainer="mmenistr@gmail.com"
 
-ENV STEAMAPPID 2223650
-ENV STEAMAPP motortown
-ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
-ENV STEAMAPPVALIDATE 0
+ENV STEAMAPPID=2223650
+ENV STEAMAPP="motortown"
+ENV STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-dedicated"
+ENV STEAMAPPVALIDATE=0
 
 COPY etc/entry.sh "${HOMEDIR}/entry.sh"
 COPY etc/DedicatedServerConfig_Sample.json "/etc/DedicatedServerConfig_Sample.json"
