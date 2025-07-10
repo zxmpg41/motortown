@@ -1,0 +1,35 @@
+services:
+  motortown-server:
+    image: dominicrico/motortown
+    container_name: motortown-dedicated
+    environment:
+      # Server configuration
+      - DEBUG=0                                     # (0 - off, 1 - steamcmd, 2 - all)
+      - STEAMAPPVALIDATE=0                          # (0 - no validation, 1 - enable validation)
+      - SERVER_HOSTNAME="motortown private server"  # (Set the visible name of your server.)
+      - SERVER_MESSAGE="Welcome!\nHave fun!"        # (Welcome message to greet new players joining your server.)
+      - SERVER_PASSWORD=""                          # (Set a server password if you want to keep it private.)
+      - MAX_PLAYERS=10                              # (Maximum player count.)
+      - MAX_PLAYER_VEHICLES=5                       # (Set the amount of vehicles players allowed to own.)
+      - ALLOW_COMPANY_VEHCILES=false                # (Are players allowed to bring their company vehicles.)
+      - ALLOW_COMPANY_AI=true                       # (Allow players to use AI for their companies.)
+      - MAX_HOUSING_RENTAL_PLOTS=1                  # (Amount of housing rental plots a player is allowed to rent.)
+      - MAX_HOUSING_RENTAL_DAYS=7                   # (Amount of days a rental plot is allowed to rent.)
+      - HOUSING_RENTAL_PRICE_RATIO=0.1              # (Price ratio of rental plots.)
+      - ALLOW_MODDED_VEHICLES=false                 # (Allow modded vehciles on your server.)
+      - NPC_VEHICLE_DENSITY=1.0                     # (Set the ai vehicle density.)
+      - NPC_POLICE_DENSITY=1.0                      # (Set the ai police density.)
+      - ENABLE_WEB_API=false                        # (Enables the web api interface.)
+      - WEB_API_PASSWORD=""                         # (Set a web interface password.)
+      - WEB_API_PORT=8080                           # (Set the port for the web interface.)
+    volumes:
+      - motortown:/home/steam/motortown-dedicated/  # Persistent data volume mount point inside container
+    ports:
+      - "27015:27015/tcp"           # TCP
+      - "27015:27015/udp"           # UDP
+      - "7777:7777/tcp"             # TCP
+      - "7777:7777/udp"             # UDP
+    stdin_open: true # Add local console for docker attach, docker attach --sig-proxy=false motortown-dedicated
+    tty: true # Add local console for docker attach, docker attach --sig-proxy=false motortown-dedicated
+volumes:
+  motortown:

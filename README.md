@@ -14,31 +14,28 @@ This Docker image contains the dedicated server of the game.
 
 Running using Docker:
 ```console
-$ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
-$ docker run -d --name=motortown -e SRCDS_TOKEN="$SRCDS_TOKEN" -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp dominicrico/motortown
+$ docker run -d --name=motortown -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp dominicrico/motortown
 ```
 
 Running using Docker with web api:
 ```console
-$ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
-$ docker run -d --name=motortown -e ENABLE_WEB_API=true -e SRCDS_TOKEN="$SRCDS_TOKEN" -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp -p 8080:8080/tcp dominicrico/motortown
+$ docker run -d --name=motortown -e ENABLE_WEB_API=true -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp -p 8080:8080/tcp dominicrico/motortown
 ```
 
 Running using a bind mount for data persistence on container recreation:
 ```console
 $ mkdir -p $(pwd)/motortown-data
 $ chown 1000:1000 $(pwd)/motortown-data # Makes sure the directory is writeable by the unprivileged container user with uid 1000, known as steam
-$ SRCDS_TOKEN="..." # check https://steamcommunity.com/dev/managegameservers
-$ docker run -d --name=motortown -e SRCDS_TOKEN="$SRCDS_TOKEN" -v $(pwd)/motortown-data:/home/steam/motortown-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp dominicrico/motortown
+$ docker run -d --name=motortown -v $(pwd)/motortown-data:/home/steam/motortown-dedicated/ -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp dominicrico/motortown
 ```
 
 or using docker-compose, see [examples](https://github.com/dominicrico/motortown/blob/main/examples/docker-compose.yml):
 ```console
-# Remember to update passwords and SRCDS_TOKEN in your compose file
+# Remember to update passwords in your compose file
 $ docker compose --file examples/docker-compose.yml up -d motortown-server
 ```
 
-You must have at least **50GB** of free disk space! See [System Requirements](./#system-requirements).
+You must have at least **5GB** of free disk space! See [System Requirements](./#system-requirements).
 
 **The container will automatically update the game on startup, so if there is a game update just restart the container.**
 
@@ -50,7 +47,7 @@ Minimum system requirements are:
 
 * 2 CPUs
 * 2GiB RAM
-* 50GB of disk space for the container or mounted as a persistent volume on `/home/steam/motortown-dedicated/`
+* 5GB of disk space for the container or mounted as a persistent volume on `/home/steam/motortown-dedicated/`
   * Note: More space may be required if you plan to install mods
 
 ## Environment Variables
@@ -61,24 +58,25 @@ Feel free to overwrite these environment variables, using -e (--env):
 ### Server Configuration
 
 ```dockerfile
-SRCDS_TOKEN=""              (Game Server Token from https://steamcommunity.com/dev/managegameservers)
-SERVER_HOSTNAME="changeme"   (Set the visible name for your private server.)
-CS2_CHEATS=0                (0 - disable cheats, 1 - enable cheats)
-CS2_SERVER_HIBERNATE=0      (Put server in a low CPU state when there are no players. 
-                             0 - hibernation disabled, 1 - hibernation enabled
-                             n.b. hibernation has been observed to trigger server crashes)
-CS2_IP=""                   (CS2 server listening IP address, 0.0.0.0 - all IP addresses on the local machine, empty - IP identified automatically)
-CS2_PORT=27015              (CS2 server listen port tcp_udp)
-CS2_RCON_PORT=""            (Optional, use a simple TCP proxy to have RCON listen on an alternative port.
-                             Useful for services like AWS Fargate which do not support mixed protocol ports.)
-CS2_LAN="0"                 (0 - LAN mode disabled, 1 - LAN Mode enabled)
-CS2_RCONPW="changeme"       (RCON password)
-CS2_PW=""                   (Optional, CS2 server password)
-CS2_MAXPLAYERS=10           (Max players)
-CS2_ADDITIONAL_ARGS=""      (Optional additional arguments to pass into cs2)
+SERVER_HOSTNAME="motortown private server"  (Set the visible name of your server.)
+SERVER_MESSAGE="Welcome!\nHave fun!"        (Welcome message to greet new players joining your server.)
+SERVER_PASSWORD=""                          (Set a server password if you want to keep it private.)
+MAX_PLAYERS=10                              (Maximum player count.)
+MAX_PLAYER_VEHICLES=5                       (Set the amount of vehicles players allowed to own.)
+ALLOW_COMPANY_VEHCILES=false                (Are players allowed to bring their company vehicles.)
+ALLOW_COMPANY_AI=true                       (Allow players to use AI for their companies.)
+MAX_HOUSING_RENTAL_PLOTS=1                  (Amount of housing rental plots a player is allowed to rent.)
+MAX_HOUSING_RENTAL_DAYS=7                   (Amount of days a rental plot is allowed to rent.)
+HOUSING_RENTAL_PRICE_RATIO=0.1              (Price ratio of rental plots.)
+ALLOW_MODDED_VEHICLES=false                 (Allow modded vehciles on your server.)
+NPC_VEHICLE_DENSITY=1.0                     (Set the ai vehicle density.)
+NPC_POLICE_DENSITY=1.0                      (Set the ai police density.)
+ENABLE_WEB_API=false                        (Enables the web api interface.)
+WEB_API_PASSWORD=""                         (Set a web interface password.)
+WEB_API_PORT=8080                           (Set the port for the web interface.)
 ```
 
-**Note:** When using `CS2_RCON_PORT` don't forget to map the port chosen with TCP protocol (e.g., add `-p 27050:27050/tcp` on the `docker run` command or add the port to the `docker-compose.yml` file).
+**Note:** When using `ENABLE_WEB_API` don't forget to map the port chosen with TCP protocol (e.g., add `-p 8080:8080/tcp` on the `docker run` command or add the port to the `docker-compose.yml` file).
 
 # Customizing this Container
 

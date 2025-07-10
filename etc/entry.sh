@@ -3,7 +3,7 @@
 # Debug
 
 ## Steamcmd debugging
-if [[ $DEBUG -eq 1 ]] || [[ $DEBUG -eq 3 ]]; then
+if [[ $DEBUG -eq 1 ]] || [[ $DEBUG -eq 2 ]]; then
     STEAMCMD_SPEW="+set_spew_level 4 4"
 fi
 
