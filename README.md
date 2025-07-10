@@ -92,8 +92,8 @@ STEAMAPPVALIDATE=0          (0=skip validation, 1=validate game files)
 
 The container includes two scripts for executing custom actions:
 
-* `/home/steam/motortown-dedicated/pre.sh` is executed before the CS2 server starts
-* `/home/steam/motortown-dedicated/post.sh` is executed after the CS2 server stops
+* `/home/steam/motortown-dedicated/pre.sh` is executed before the Motor Town server starts
+* `/home/steam/motortown-dedicated/post.sh` is executed after the Motor Town server stops
 
 When using a persient volume mounted at `/home/steam/motortown-dedicated/` you may edit these scripts to perform custom actions.
 
