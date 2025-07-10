@@ -4,7 +4,7 @@
 
 # BUILD STAGE
 
-FROM cm2network/steamcmd:root-bookworm as build_stage
+FROM cm2network/steamcmd:root-bookworm AS build_stage
 
 LABEL maintainer="joedwards32@gmail.com"
 LABEL maintainer="mmenistr@gmail.com"
@@ -50,13 +50,13 @@ ENV SERVER_HOSTNAME="motortown private server" \
     ALLOW_COMPANY_VEHCILES=false \
     ALLOW_COMPANY_AI=true \
     MAX_HOUSING_RENTAL_PLOTS=1 \
-    MAX_HOUSING_RENTAL_DAYS=7 \    
+    MAX_HOUSING_RENTAL_DAYS=7 \
     HOUSING_RENTAL_PRICE_RATIO=0.1 \
     ALLOW_MODDED_VEHICLES=false \
     NPC_VEHICLE_DENSITY=1.0 \
     NPC_POLICE_DENSITY=1.0 \
     ENABLE_WEB_API=false \
-    WEB_API_PASSWORD="pa$$w0rd" \
+    WEB_API_PASSWORD="p4ssw0rd" \
     WEB_API_PORT=8080
 
 # Set permissions on STEAMAPPDIR
@@ -74,6 +74,6 @@ CMD ["bash", "entry.sh"]
 
 # Expose ports
 EXPOSE 7777/tcp \
-	27015/tcp \
-	27015/udp \
-    7777/udp
+        7777/udp \
+        27015/tcp \
+	27015/udp
