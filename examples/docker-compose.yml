@@ -1,6 +1,6 @@
 services:
   motortown-server:
-    image: dominicrico/motortown
+    image: coderocket/motortown
     container_name: motortown-dedicated
     environment:
       # Server configuration

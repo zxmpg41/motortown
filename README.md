@@ -14,7 +14,7 @@ This Docker image contains the dedicated server of the game.
 
 Running using Docker:
 ```console
-$ docker run -d --name=motortown -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp dominicrico/motortown
+$ docker run -d --name=motortown -p 27015:27015/tcp -p 27015:27015/udp -p 7777:7777/tcp -p 7777:7777/udp coderocket/motortown
 ```
 
 Running using Docker with web api:
