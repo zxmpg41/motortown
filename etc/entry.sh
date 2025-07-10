@@ -34,7 +34,7 @@ while [[ $steamcmd_rc != 0 ]] && [[ $attempt -lt $MAX_ATTEMPTS ]]; do
                                 +force_install_dir "${STEAMAPPDIR}" \
                                 +@bClientTryRequestManifestWithoutCode 1 \
 				+login anonymous \
-				+app_update "${STEAMAPPID}" -beta "test2" -betapassword "motortowndeti" "${VALIDATE}"\
+				+app_update "${STEAMAPPID}" -beta "test2" -betapassword "motortowndedi" "${VALIDATE}"\
 				+quit 
     steamcmd_rc=$?
 done
